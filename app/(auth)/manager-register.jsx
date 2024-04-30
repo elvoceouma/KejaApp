@@ -9,7 +9,6 @@ const registerScreen = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
-    passwordConfirm: "",
 
   });
   const [isSubmittingRefisterForm, setisSubmittingRefisterForm] = useState(false);
@@ -41,7 +40,6 @@ const registerScreen = () => {
           />
           <FormFiend
             label="Password"
-            type="password"
             value={form.password}
             handleonTextChanged={(e) =>
               setForm({
@@ -53,12 +51,11 @@ const registerScreen = () => {
           />
             <FormFiend
             label="Confirm Password"
-            type="password"
-            value={form.passwordConfirm}
+            value={form.password}
             handleonTextChanged={(e) =>
               setForm({
                 ...form,
-                passwordConfirm: e,
+                password: e,
               })
             }
             formStyles="mt-7"
@@ -90,9 +87,9 @@ const registerScreen = () => {
     
             <Link
               href="/manager-register"
-              className="text-lg font-pextrabold text-secondary border-"
+              className="text-lg font-psemibold text-secondary"
             >
-             Create a property manager's Account
+             Create a property manager Account
             </Link>
           </View>
         </View>

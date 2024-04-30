@@ -29,9 +29,9 @@ const PageTabsLayout = () => {
           tabBarShowLabel: false,
           tabBarStyle: {
             backgroundColor: "#161622",
-            borderTopWidth: 1,
+            borderTopWidth: 1.5,
             borderTopColor: "#232533",
-            height: 84,
+            height: 75,
           },
         }}
       >
