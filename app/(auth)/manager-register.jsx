@@ -4,12 +4,12 @@ import { Link } from 'expo-router';
 
 import CustomButton from '../../components/CustomButton';
 import { images } from '../../constants';
-import FormFiend from "../../components/FormFiend";
+import FormFiend from "../../components/FormField";
 const registerScreen = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
-
+    passwordConfirm: "",
   });
   const [isSubmittingRefisterForm, setisSubmittingRefisterForm] = useState(false);
 
@@ -40,6 +40,7 @@ const registerScreen = () => {
           />
           <FormFiend
             label="Password"
+            type="password"
             value={form.password}
             handleonTextChanged={(e) =>
               setForm({
@@ -49,13 +50,14 @@ const registerScreen = () => {
             }
             formStyles="mt-7"
           />
-            <FormFiend
+           <FormFiend
             label="Confirm Password"
-            value={form.password}
+            type="password"
+            value={form.passwordConfirm}
             handleonTextChanged={(e) =>
               setForm({
                 ...form,
-                password: e,
+                passwordConfirm: e,
               })
             }
             formStyles="mt-7"
@@ -89,7 +91,7 @@ const registerScreen = () => {
               href="/manager-register"
               className="text-lg font-psemibold text-secondary"
             >
-             Create a property manager Account
+             Create from Existing account
             </Link>
           </View>
         </View>

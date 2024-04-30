@@ -4,7 +4,7 @@ import { Link } from 'expo-router';
 
 import CustomButton from '../../components/CustomButton';
 import { images } from '../../constants';
-import FormFiend from "../../components/FormFiend";
+import FormFiend from "../../components/FormField";
 const registerScreen = () => {
   const [form, setForm] = useState({
     email: "",

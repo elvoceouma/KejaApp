@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { images } from "../../constants";
-import FormFiend from "../../components/FormFiend";
+import FormFiend from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { Link } from "expo-router";
 
@@ -41,6 +41,7 @@ const loginScreen = () => {
           />
           <FormFiend
             label="Password"
+            type="password"
             value={form.password}
             handleonTextChanged={(e) =>
               setForm({
