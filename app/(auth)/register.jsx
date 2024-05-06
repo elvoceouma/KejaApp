@@ -1,20 +1,44 @@
-import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
-import { Link } from 'expo-router';
+import {
+  Alert,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import React, { useState } from "react";
+import { Link, router } from "expo-router";
 
-import CustomButton from '../../components/CustomButton';
-import { images } from '../../constants';
-import FormFiend from "../../components/FormField";
+import CustomButton from "../../components/CustomButton";
+import { images } from "../../constants";
+import FormField from "../../components/FormField";
+import { registerUser } from "../../utils/user";
+
 const registerScreen = () => {
   const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     passwordConfirm: "",
-
   });
-  const [isSubmittingRefisterForm, setisSubmittingRefisterForm] = useState(false);
+  const [submittingRegisterForm, setSubmittingRegisterForm] =
+    useState(false);
 
-  const submitRegisterData = () => {};
+  const registerByEmail = async ({ firstName, lastName, email, password }) => {
+    setSubmittingRegisterForm(true);
+    try {
+      const user = await registerUser(firstName, lastName, email, password);
+      console.log(user);
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setSubmittingRegisterForm(false);
+    }
+  };
+
+  const handleOnGoogleRegister = () => {};
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
@@ -25,9 +49,9 @@ const registerScreen = () => {
             className="w-[100px] h-[30px]"
           />
           <Text className="text-2xl text-white text-semibold mt-10 font-psemibold">
-           There are over +3000 homes and apartments in Your Area
+            There are over +3000 homes and apartments in Your Area
           </Text>
-          <FormFiend
+          <FormField
             label="Email"
             value={form.email}
             handleonTextChanged={(e) =>
@@ -39,7 +63,31 @@ const registerScreen = () => {
             formStyles="mt-7"
             keyBoardType="email-address"
           />
-          <FormFiend
+          <FormField
+            label="First Name"
+            value={form.firstName}
+            handleonTextChanged={(e) =>
+              setForm({
+                ...form,
+                email: e,
+              })
+            }
+            formStyles="mt-7"
+            keyBoardType="email-address"
+          />
+          <FormField
+            label="Last Name"
+            value={form.lastName}
+            handleonTextChanged={(e) =>
+              setForm({
+                ...form,
+                email: e,
+              })
+            }
+            formStyles="mt-7"
+            keyBoardType="email-address"
+          />
+          <FormField
             label="Password"
             type="password"
             value={form.password}
@@ -51,7 +99,7 @@ const registerScreen = () => {
             }
             formStyles="mt-7"
           />
-            <FormFiend
+          <FormField
             label="Confirm Password"
             type="password"
             value={form.passwordConfirm}
@@ -65,19 +113,19 @@ const registerScreen = () => {
           />
           <CustomButton
             label={"Sign Up"}
-            handlePress={submitRegisterData}
+            handlePress={registerByEmail}
             constainerStyles="mt-10"
-            isLoading={isSubmittingRefisterForm}
+            isLoading={submittingRegisterForm}
           />
-           <CustomButton
+          <CustomButton
             label={"Continue with Google"}
-            handlePress={submitRegisterData}
+            handlePress={handleOnGoogleRegister}
             constainerStyles="mt-10"
-            isLoading={isSubmittingRefisterForm}
+            isLoading={submittingRegisterForm}
           />
           <View className="justify-center pt-5 flex-row gap-2">
             <Text className="text-lg font-psemibold text-secondary-100">
-             Already have an Account? 
+              Already have an Account?
             </Text>
             <Link
               href="login"
@@ -87,20 +135,19 @@ const registerScreen = () => {
             </Link>
           </View>
           <View className="justify-center pt-5 flex-row gap-2">
-    
             <Link
               href="/manager-register"
               className="text-lg font-pextrabold text-secondary border-"
             >
-             Create a property manager's Account
+              Create a property manager's Account
             </Link>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default registerScreen
+export default registerScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

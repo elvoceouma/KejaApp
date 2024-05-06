@@ -14,7 +14,11 @@ const loginScreen = () => {
   });
   const [isSubmittingForm, setIsSubmittingForm] = useState(false);
 
-  const submitLoginData = () => {};
+  const submitLoginData = () => {
+    console.log(form);
+  };
+
+  const handleOnGoogleSignIn = () => {};
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
@@ -59,7 +63,7 @@ const loginScreen = () => {
           />
           <CustomButton
             label={"Login with Google"}
-            handlePress={submitLoginData}
+            handlePress={handleOnGoogleSignIn}
             constainerStyles="mt-10"
             isLoading={isSubmittingForm}
           />
@@ -76,7 +80,7 @@ const loginScreen = () => {
           </View>
           <View className="justify-center pt-5 flex-row gap-2">
             <Text className="text-lg font-psemibold text-secondary-100">
-             Forgot Password?
+              Forgot Password?
             </Text>
             <Link
               href="reset-password"
