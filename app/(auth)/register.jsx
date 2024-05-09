@@ -14,6 +14,7 @@ import CustomButton from "../../components/CustomButton";
 import { images } from "../../constants";
 import FormField from "../../components/FormField";
 import { registerUser } from "../../utils/user";
+import axios from "axios";
 
 const registerScreen = () => {
   const [form, setForm] = useState({
@@ -23,19 +24,30 @@ const registerScreen = () => {
     password: "",
     passwordConfirm: "",
   });
-  const [submittingRegisterForm, setSubmittingRegisterForm] =
-    useState(false);
+  const [submittingRegisterForm, setSubmittingRegisterForm] = useState(false);
 
   const registerByEmail = async ({ firstName, lastName, email, password }) => {
-    setSubmittingRegisterForm(true);
-    try {
-      const user = await registerUser(firstName, lastName, email, password);
-      console.log(user);
-    } catch (error) {
-      Alert.alert("Error", error.message);
-    } finally {
-      setSubmittingRegisterForm(false);
-    }
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      FirstName: "New",
+      LastName: "Name",
+      email: "umaoine@gmail.com",
+      password: "@Elmvice.2021",
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:4000/api/user/register", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   };
 
   const handleOnGoogleRegister = () => {};
@@ -69,7 +81,7 @@ const registerScreen = () => {
             handleonTextChanged={(e) =>
               setForm({
                 ...form,
-                email: e,
+                firstName: e,
               })
             }
             formStyles="mt-7"
@@ -81,7 +93,7 @@ const registerScreen = () => {
             handleonTextChanged={(e) =>
               setForm({
                 ...form,
-                email: e,
+                lastName: e,
               })
             }
             formStyles="mt-7"

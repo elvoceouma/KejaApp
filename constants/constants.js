@@ -1,4 +1,4 @@
-const serverLink = "http://localhost:8080/api"
+const serverLink = "http://localhost:4000/api"
 
 const user = "/user"
 const userEndPoint = serverLink + user;
